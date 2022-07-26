@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/// ELIMINATE THIS THREE LINES, WE WILL NOT USE THEM
+// Route::get('/', function () {
+//     return view('welcome');
+// });
