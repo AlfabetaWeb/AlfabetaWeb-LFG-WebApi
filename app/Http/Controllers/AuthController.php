@@ -12,6 +12,7 @@ class AuthController extends Controller
 {    
     const ROLE_USER = 1;
 
+//THIS FUNCTION ALLOWS USER TO REGISTER
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -37,6 +38,7 @@ class AuthController extends Controller
         return response()->json(compact('user', 'token'), 201);
     }
 
+//THIS FUNCTION ALLOWS LOGIN REGISTERED USER
     public function login(Request $request)
     {
         $input = $request->only('email', 'password');
@@ -55,11 +57,13 @@ class AuthController extends Controller
         ]);
     }
 
+//THIS FUNCTION SHOWS REGISTERED USER
     public function me()
     {
         return response()->json(auth()->user());;
     }
 
+//THIS FUNCTION ALLOWS LOGOUT TO AUTH USER
     public function logout(Request $request)
     {
         $this->validate($request, [
