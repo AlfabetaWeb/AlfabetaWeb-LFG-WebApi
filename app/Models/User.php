@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -43,7 +42,7 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-}
+
 
     public function getJWTIdentifier()
         {
@@ -54,7 +53,9 @@ class User extends Authenticatable implements JWTSubject
         *
         * @return array
         */
+
     public function getJWTCustomClaims()
         {
             return [];
         }
+}
