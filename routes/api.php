@@ -40,12 +40,11 @@ Route::group(["middleware" => ["jwt.auth", "isSuperAdmin"]] , function() {
 Route::group(["middleware" => "jwt.auth"] , function() {
     Route::post('/game', [GameController::class, 'createGame']);
     Route::get('/games', [GameController::class, 'getAllGames']); 
+    Route::get('/games/{id}', [GameController::class, 'getGameById']);
   
 });
 
 ////
 
-
-Route::get('/tasks/{id}', [TaskController::class, 'getTaskById']);
 Route::put('/tasks/{id}', [TaskController::class, 'updateTask']);
 Route::get('/user/task/{id}', [TaskController::class, 'getUserByIdTask']);

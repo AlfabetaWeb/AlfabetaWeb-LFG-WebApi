@@ -67,11 +67,6 @@ class GameController extends Controller
             Log::info("Getting all Games");
             $userId = auth()->user()->id;
 
-            // $tasks = Task::query()
-            //     ->where('user_id',$userId)
-            //     ->get()
-            //     ->toArray();
-
             $games = User::query()->find($userId)->games;
 
             return response()->json(
@@ -84,6 +79,50 @@ class GameController extends Controller
             );
         } catch (\Exception $exception) {
             Log::error("Error getting gamek: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting games"
+                ],
+                500
+            );
+        }
+    }
+
+    //// GET GAME BY ID
+    public function getGameById($id)
+    {
+        try {
+            $userId = auth()->user()->id;
+
+            $game = Game::query()
+                ->where('id', '=', $id)
+                ->where('user_id', '=', $userId)
+                ->get()
+                ->toArray();
+
+            if (!$game) {
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => "Game doesnt exists"
+                    ],
+                    404
+                );
+            };
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "Get by Game",
+                    'data' => $game
+                ],
+                200
+            );
+
+        } catch (\Exception $exception) {
+            Log::error("Error getting task: " . $exception->getMessage());
 
             return response()->json(
                 [
